@@ -1,15 +1,15 @@
-import { FC, useEffect } from "react";
-import { PROXY, subtitleProxy } from "../../shared/constants";
+import { FC, useEffect } from 'react';
+import { PROXY, subtitleProxy } from '../../shared/constants';
 
-import Comment from "./Comment";
-import { DetailType } from "../../shared/types";
-import HlsPlayer from "react-hls-player";
-import MetaData from "./MetaData";
-import NavBar from "../NavBar";
-import { Player } from "react-tuby";
-import Similar from "./Similar";
-import Skeleton from "../Skeleton";
-import Title from "../Title";
+import Comment from './Comment';
+import { DetailType } from '../../shared/types';
+import HlsPlayer from 'react-hls-player';
+import MetaData from './MetaData';
+import NavBar from '../NavBar';
+import { Player } from 'react-tuby';
+import Similar from './Similar';
+import Skeleton from '../Skeleton';
+import Title from '../Title';
 
 interface WatchViewProps {
   data?: DetailType;
@@ -29,22 +29,13 @@ interface WatchViewProps {
   episodeIndex?: number;
 }
 
-const WatchView: FC<WatchViewProps> = ({
-  data,
-  sources,
-  subtitles,
-  episodeIndex,
-}) => {
-  const mediaType = typeof episodeIndex === "undefined" ? "movie" : "tv";
-  const playerKey = `${mediaType}-${data?.id}${
-    episodeIndex ? `-${episodeIndex}` : ""
-  }`;
+const WatchView: FC<WatchViewProps> = ({ data, sources, subtitles, episodeIndex }) => {
+  const mediaType = typeof episodeIndex === 'undefined' ? 'movie' : 'tv';
+  const playerKey = `${mediaType}-${data?.id}${episodeIndex ? `-${episodeIndex}` : ''}`;
 
   useEffect(() => {
     if (!data) return;
-    let existing = JSON.parse(
-      localStorage.getItem("roman-recent") || "[]"
-    ) as {
+    let existing = JSON.parse(localStorage.getItem('roman-recent') || '[]') as {
       id: string;
       category: number;
       coverVerticalUrl: string;
@@ -62,19 +53,13 @@ const WatchView: FC<WatchViewProps> = ({
       name: data.name,
     });
 
-    localStorage.setItem("roman-recent", JSON.stringify(existing));
+    localStorage.setItem('roman-recent', JSON.stringify(existing));
   }, [data]);
 
   return (
     <>
       {data && (
-        <Title
-          value={`Watch ${data.name}${
-            typeof episodeIndex !== "undefined"
-              ? ` - Episode ${episodeIndex + 1}`
-              : ""
-          }`}
-        />
+        <Title value={`Watch ${data.name}${typeof episodeIndex !== 'undefined' ? ` - Episode ${episodeIndex + 1}` : ''}`} />
       )}
       <div className="flex justify-center">
         <div className="mx-[4vw] lg:mx-[6vw] flex-1">
@@ -95,13 +80,7 @@ const WatchView: FC<WatchViewProps> = ({
                       })) || []
                     }
                   >
-                    {(ref, props) => (
-                      <HlsPlayer
-                        playerRef={ref}
-                        {...props}
-                        src={`${PROXY}${props.src}`}
-                      />
-                    )}
+                    {(ref, props) => <HlsPlayer playerRef={ref} {...props} src={`${PROXY}${props.src}`} />}
                   </Player>
                 ) : (
                   <div className="w-full h-0 pb-[56.25%] relative">

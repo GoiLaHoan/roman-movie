@@ -1,13 +1,15 @@
 {
-  "name": "roman",
+  "name": "roman-movie",
   "version": "0.0.0",
-  "homepage": "https://wizevanhoan.github.io/movie-ints/",
+  "homepage": "",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "prettier": "prettier --check \"src/\"",
+    "prettier:fix": "prettier --write \"src/\""
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -32,6 +34,7 @@
     "@vitejs/plugin-react": "^1.0.7",
     "autoprefixer": "^10.4.1",
     "postcss": "^8.4.5",
+    "prettier": "2.6.2",
     "tailwindcss": "^3.0.8",
     "typescript": "^4.4.4",
     "vite": "^2.9.8"

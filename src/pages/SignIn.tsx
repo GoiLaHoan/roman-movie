@@ -1,16 +1,11 @@
-import {
-  AuthProvider,
-  FacebookAuthProvider,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { FC, useState } from "react";
+import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { FC, useState } from 'react';
 
-import { Navigate } from "react-router-dom";
-import Title from "../components/Title";
-import { auth } from "../shared/firebase";
-import { useQueryParams } from "../hooks/useQueryParams";
-import { useStore } from "../store";
+import { Navigate } from 'react-router-dom';
+import Title from '../components/Title';
+import { auth } from '../shared/firebase';
+import { useQueryParams } from '../hooks/useQueryParams';
+import { useStore } from '../store';
 
 const SignIn: FC = () => {
   const currentUser = useStore((state) => state.currentUser);
@@ -18,7 +13,7 @@ const SignIn: FC = () => {
   const queryParams = useQueryParams();
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleSignIn = (provider: AuthProvider) => {
     setLoading(true);
@@ -35,7 +30,7 @@ const SignIn: FC = () => {
       });
   };
 
-  if (currentUser) return <Navigate to={queryParams.get("redirect") || "/"} />;
+  if (currentUser) return <Navigate to={queryParams.get('redirect') || '/'} />;
 
   return (
     <>
@@ -45,11 +40,7 @@ const SignIn: FC = () => {
           <div className="w-[90vw] max-w-[350px] bg-black p-10 flex flex-col items-center gap-6 rounded-xl">
             <h1 className="text-3xl font-semibold">Sign In</h1>
 
-            {error && (
-              <div className="p-3 bg-red-200 text-red-600 border border-red-400 w-full rounded">
-                {error}
-              </div>
-            )}
+            {error && <div className="p-3 bg-red-200 text-red-600 border border-red-400 w-full rounded">{error}</div>}
 
             <button
               disabled={loading}

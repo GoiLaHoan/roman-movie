@@ -1,17 +1,15 @@
-import CategoryResult from "../components/Category/CategoryResult";
-import Error from "../components/Error";
-import { FC } from "react";
-import NavBar from "../components/NavBar";
-import { getSearchConfig } from "../services/explore";
-import { useParams } from "react-router-dom";
-import useSWR from "swr";
+import CategoryResult from '../components/Category/CategoryResult';
+import Error from '../components/Error';
+import { FC } from 'react';
+import NavBar from '../components/NavBar';
+import { getSearchConfig } from '../services/explore';
+import { useParams } from 'react-router-dom';
+import useSWR from 'swr';
 
 const Category: FC = () => {
   const { id } = useParams() as { id: string };
 
-  const { data: searchConfig, error } = useSWR(`search-config`, () =>
-    getSearchConfig()
-  );
+  const { data: searchConfig, error } = useSWR(`search-config`, () => getSearchConfig());
 
   if (error) return <Error />;
 

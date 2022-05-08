@@ -1,20 +1,18 @@
-import Error from "../Error";
-import { FC } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Link } from "react-router-dom";
-import Skeleton from "../Skeleton";
-import { resizeImage } from "../../shared/constants";
-import { searchWithKeyword } from "../../services/search";
-import useSWR from "swr";
+import Error from '../Error';
+import { FC } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link } from 'react-router-dom';
+import Skeleton from '../Skeleton';
+import { resizeImage } from '../../shared/constants';
+import { searchWithKeyword } from '../../services/search';
+import useSWR from 'swr';
 
 interface SearchResultProps {
   query: string;
 }
 
 const SearchResult: FC<SearchResultProps> = ({ query }) => {
-  const { data, error } = useSWR(`search-${query}`, () =>
-    searchWithKeyword(query)
-  );
+  const { data, error } = useSWR(`search-${query}`, () => searchWithKeyword(query));
 
   if (error) return <Error />;
 
@@ -35,9 +33,7 @@ const SearchResult: FC<SearchResultProps> = ({ query }) => {
           {data.map((item) => (
             <Link
               title={item.name}
-              to={
-                item.domainType === 0 ? `/movie/${item.id}` : `/tv/${item.id}`
-              }
+              to={item.domainType === 0 ? `/movie/${item.id}` : `/tv/${item.id}`}
               key={item.id}
               className="relative h-0 pb-[163%] bg-dark-lighten rounded overflow-hidden group"
             >
@@ -46,7 +42,7 @@ const SearchResult: FC<SearchResultProps> = ({ query }) => {
                   <LazyLoadImage
                     effect="opacity"
                     className="absolute top-0 left-0 w-full h-full object-cover"
-                    src={resizeImage(item.coverVerticalUrl, "250")}
+                    src={resizeImage(item.coverVerticalUrl, '250')}
                     alt=""
                   />
                 </div>

@@ -1,9 +1,9 @@
-import { DiscoveryItem } from "../shared/types";
-import axios from "../shared/axios";
+import { DiscoveryItem } from '../shared/types';
+import axios from '../shared/axios';
 
 export const getDiscoveryItems = async (page = 0): Promise<DiscoveryItem[]> => {
   const data = (
-    await axios.get("recommendPool/getVideoFromRecommondPool", {
+    await axios.get('recommendPool/getVideoFromRecommondPool', {
       params: {
         page,
       },
@@ -14,13 +14,13 @@ export const getDiscoveryItems = async (page = 0): Promise<DiscoveryItem[]> => {
 
   const sources = (
     await axios.post(
-      "media/bathGetplayInfo",
+      'media/bathGetplayInfo',
       data.map((item) => ({
         category: item.category,
         contentId: item.id,
         episodeId: item.mediaInfo.id,
         definition: item.mediaInfo.definitionList.slice(-1)[0].code,
-      }))
+      })),
     )
   ).data.data.map((item: any) => item.mediaUrl);
 

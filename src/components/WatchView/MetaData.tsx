@@ -1,7 +1,7 @@
-import { DetailType } from "../../shared/types";
-import { FC } from "react";
-import { Link } from "react-router-dom";
-import Skeleton from "../Skeleton";
+import { DetailType } from '../../shared/types';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import Skeleton from '../Skeleton';
 
 interface MetaDataProps {
   data?: DetailType;
@@ -49,7 +49,7 @@ const MetaData: FC<MetaDataProps> = ({ data, episodeIndex }) => {
                     to={`/tv/${data.id}?episode=${index}`}
                     key={index}
                     className={`px-4 py-[8px] bg-dark-lighten rounded hover:brightness-125 transition duration-300 ${
-                      index === episodeIndex ? "!bg-primary text-white" : ""
+                      index === episodeIndex ? '!bg-primary text-white' : ''
                     }`}
                   >
                     {index + 1}

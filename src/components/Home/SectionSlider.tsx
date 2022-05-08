@@ -1,10 +1,10 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { FC } from "react";
-import { IMAGE_CARD_SIZE } from "../../shared/constants";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Link } from "react-router-dom";
-import { Navigation } from "swiper";
+import { FC } from 'react';
+import { IMAGE_CARD_SIZE } from '../../shared/constants';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link } from 'react-router-dom';
+import { Navigation } from 'swiper';
 
 interface SliderProps {
   images: {
@@ -17,18 +17,9 @@ interface SliderProps {
 
 const Slider: FC<SliderProps> = ({ images, coverType }) => {
   return (
-    <Swiper
-      modules={[Navigation]}
-      navigation
-      slidesPerView="auto"
-      slidesPerGroupAuto
-      spaceBetween={30}
-    >
+    <Swiper modules={[Navigation]} navigation slidesPerView="auto" slidesPerGroupAuto spaceBetween={30}>
       {images.map((item) => (
-        <SwiperSlide
-          style={{ width: IMAGE_CARD_SIZE[coverType || 1].width }}
-          key={item.image}
-        >
+        <SwiperSlide style={{ width: IMAGE_CARD_SIZE[coverType || 1].width }} key={item.image}>
           <Link to={item.link}>
             <div className="rounded-lg overflow-hidden bg-dark-lighten group">
               <LazyLoadImage

@@ -5,11 +5,10 @@ export const formatVideoTime = (time: number) => {
   return timeString;
 };
 
-export const isMobile = () =>
-  /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent);
+export const isMobile = () => /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent);
 
 export const htmlToText = (html: string) => {
-  const div = document.createElement("div");
+  const div = document.createElement('div');
   div.innerHTML = html;
   return div.textContent as string;
 };
@@ -28,9 +27,9 @@ export const calculateCreatedTime = (timeCreated: number) => {
   for (const key in periods) {
     if (diff >= periods[key]) {
       let result = Math.floor(diff / periods[key]);
-      return `${result} ${result === 1 ? key : key + "s"} ago`;
+      return `${result} ${result === 1 ? key : key + 's'} ago`;
     }
   }
 
-  return "Just now";
+  return 'Just now';
 };

@@ -1,28 +1,24 @@
-import { FC, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { FC, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-import Error from "../components/Error";
-import HlsPlayer from "react-hls-player";
-import ImageFade from "../components/ImageFade";
-import { InView } from "react-intersection-observer";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Sidebar from "../components/Sidebar";
-import { getDiscoveryItems } from "../services/discovery";
-import { resizeImage } from "../shared/constants";
-import useSWRInfinite from "swr/infinite";
+import Error from '../components/Error';
+import HlsPlayer from 'react-hls-player';
+import ImageFade from '../components/ImageFade';
+import { InView } from 'react-intersection-observer';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Sidebar from '../components/Sidebar';
+import { getDiscoveryItems } from '../services/discovery';
+import { resizeImage } from '../shared/constants';
+import useSWRInfinite from 'swr/infinite';
 
 const Discovery: FC = () => {
   const [sidebarActive, setSidebarActive] = useState(false);
 
   const getKey = (index: number) => `discovery-${index || 0}`;
 
-  const { data, error, setSize } = useSWRInfinite(
-    getKey,
-    (key) => getDiscoveryItems(Number(key.split("-").slice(-1)[0])),
-    {
-      revalidateFirstPage: false,
-    }
-  );
+  const { data, error, setSize } = useSWRInfinite(getKey, (key) => getDiscoveryItems(Number(key.split('-').slice(-1)[0])), {
+    revalidateFirstPage: false,
+  });
 
   const location = useLocation();
 
@@ -36,12 +32,7 @@ const Discovery: FC = () => {
     <>
       <div className="flex sm:hidden justify-between px-[4vw] mt-6">
         <Link to="/" className="flex items-center gap-2">
-        <img
-            style={{ marginLeft: "-16px" }}
-            className="w-auto h-12 mr-16"
-            src="/logo-roman.png"
-            alt=""
-        />
+          <img style={{ marginLeft: '-16px' }} className="w-auto h-12 mr-16" src="/logo-roman.png" alt="" />
         </Link>
 
         <button onClick={() => setSidebarActive(!sidebarActive)}>
@@ -50,10 +41,7 @@ const Discovery: FC = () => {
       </div>
 
       <div className="flex">
-        <Sidebar
-          sidebarActive={sidebarActive}
-          setSidebarActive={setSidebarActive}
-        />
+        <Sidebar sidebarActive={sidebarActive} setSidebarActive={setSidebarActive} />
 
         <div className="flex-grow py-10 px-[4vw]">
           {!data && (
@@ -71,10 +59,7 @@ const Discovery: FC = () => {
               {data
                 ?.reduce((acc, current) => [...acc, ...current], [])
                 .map((item) => (
-                  <div
-                    key={item.id}
-                    className="w-full max-w-[600px] flex gap-2"
-                  >
+                  <div key={item.id} className="w-full max-w-[600px] flex gap-2">
                     <ImageFade
                       className="w-12 h-12 rounded-full flex-shrink-0 bg-gray-500"
                       src={resizeImage(item.upInfo.upImgUrl)}
@@ -82,9 +67,7 @@ const Discovery: FC = () => {
                     />
 
                     <div className="flex flex-col items-stretch flex-grow gap-3">
-                      <p className="font-semibold">
-                        {item.refList[0]?.name || item.name}
-                      </p>
+                      <p className="font-semibold">{item.refList[0]?.name || item.name}</p>
 
                       <p>{item.introduction}</p>
 
@@ -117,9 +100,7 @@ const Discovery: FC = () => {
                         <div className="flex flex-col items-center gap-2">
                           <Link
                             to={
-                              item.refList[0].category === 0
-                                ? `/movie/${item.refList[0].id}`
-                                : `/tv/${item.refList[0].id}`
+                              item.refList[0].category === 0 ? `/movie/${item.refList[0].id}` : `/tv/${item.refList[0].id}`
                             }
                             className="bg-dark-lighten rounded-full h-10 w-10 flex justify-center items-center"
                           >

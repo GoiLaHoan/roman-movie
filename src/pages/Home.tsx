@@ -1,27 +1,25 @@
-import { FC, Fragment, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { FC, Fragment, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-import BannerSlider from "../components/Home/BannerSlider";
-import InfiniteScroll from "react-infinite-scroll-component";
-import SearchBox from "../components/Search/SearchBox";
-import SectionSlider from "../components/Home/SectionSlider";
-import SideBar from "../components/Sidebar";
-import Skeleton from "../components/Skeleton";
-import SkeletonSlider from "../components/Home/SkeletonSlider";
-import Title from "../components/Title";
-import TopSearches from "../components/Home/TopSearches";
-import { getHome } from "../services/home";
-import { resizeImage } from "../shared/constants";
-import useSWRInfinite from "swr/infinite";
+import BannerSlider from '../components/Home/BannerSlider';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import SearchBox from '../components/Search/SearchBox';
+import SectionSlider from '../components/Home/SectionSlider';
+import SideBar from '../components/Sidebar';
+import Skeleton from '../components/Skeleton';
+import SkeletonSlider from '../components/Home/SkeletonSlider';
+import Title from '../components/Title';
+import TopSearches from '../components/Home/TopSearches';
+import { getHome } from '../services/home';
+import { resizeImage } from '../shared/constants';
+import useSWRInfinite from 'swr/infinite';
 
 const Home: FC = () => {
   const getKey = (index: number) => `home-${index || 0}`;
 
-  const { data, error, setSize } = useSWRInfinite(
-    getKey,
-    (key) => getHome(Number(key.split("-").slice(-1)[0])),
-    { revalidateFirstPage: false }
-  );
+  const { data, error, setSize } = useSWRInfinite(getKey, (key) => getHome(Number(key.split('-').slice(-1)[0])), {
+    revalidateFirstPage: false,
+  });
 
   const [sidebarActive, setSidebarActive] = useState(false);
 
@@ -37,12 +35,7 @@ const Home: FC = () => {
 
       <div className="flex sm:hidden justify-between px-[4vw] mt-6">
         <Link to="/" className="flex items-center gap-2">
-        <img
-            style={{ marginLeft: "-16px" }}
-            className="w-auto h-12 mr-16"
-            src="/logo-roman.png"
-            alt=""
-        />
+          <img style={{ marginLeft: '-16px' }} className="w-auto h-12 mr-16" src="/logo-roman.png" alt="" />
         </Link>
 
         <button onClick={() => setSidebarActive(!sidebarActive)}>
@@ -51,10 +44,7 @@ const Home: FC = () => {
       </div>
 
       <div className="flex">
-        <SideBar
-          sidebarActive={sidebarActive}
-          setSidebarActive={setSidebarActive}
-        />
+        <SideBar sidebarActive={sidebarActive} setSidebarActive={setSidebarActive} />
 
         <div className="flex-grow px-[4vw] md:px-8 pb-8 pt-0 overflow-hidden flex flex-col items-stretch">
           {!data || error ? (
@@ -89,28 +79,23 @@ const Home: FC = () => {
               {data
                 .reduce((acc, current) => [...acc, ...current], [])
                 .map((section) =>
-                  section.homeSectionType === "BANNER" ? (
-                    <div
-                      key={section.homeSectionId}
-                      className="overflow-hidden w-full mt-8"
-                    >
+                  section.homeSectionType === 'BANNER' ? (
+                    <div key={section.homeSectionId} className="overflow-hidden w-full mt-8">
                       <BannerSlider
                         images={
                           (section.recommendContentVOList
                             .map((item) => {
-                              const searchParams = new URLSearchParams(
-                                new URL(item.jumpAddress).search
-                              );
+                              const searchParams = new URLSearchParams(new URL(item.jumpAddress).search);
 
-                              if (!searchParams.get("id")) return null;
+                              if (!searchParams.get('id')) return null;
 
                               return {
                                 title: item.title,
                                 image: item.imageUrl,
                                 link:
-                                  searchParams.get("type") === "0"
-                                    ? `/movie/${searchParams.get("id")}`
-                                    : `/tv/${searchParams.get("id")}`,
+                                  searchParams.get('type') === '0'
+                                    ? `/movie/${searchParams.get('id')}`
+                                    : `/tv/${searchParams.get('id')}`,
                               };
                             })
                             .filter(Boolean) as {
@@ -123,29 +108,25 @@ const Home: FC = () => {
                     </div>
                   ) : (
                     <div key={section.homeSectionId}>
-                      <h1 className="text-2xl mb-3 mt-8">
-                        {section.homeSectionName.replace("on Loklok", "")}
-                      </h1>
+                      <h1 className="text-2xl mb-3 mt-8">{section.homeSectionName.replace('on Loklok', '')}</h1>
 
                       <SectionSlider
                         images={section.recommendContentVOList.map((item) => {
-                          const searchParams = new URLSearchParams(
-                            new URL(item.jumpAddress).search
-                          );
+                          const searchParams = new URLSearchParams(new URL(item.jumpAddress).search);
 
                           return {
                             title: item.title,
-                            image: resizeImage(item.imageUrl, "200"),
+                            image: resizeImage(item.imageUrl, '200'),
                             link:
-                              searchParams.get("type") === "0"
-                                ? `/movie/${searchParams.get("id")}`
-                                : `/tv/${searchParams.get("id")}`,
+                              searchParams.get('type') === '0'
+                                ? `/movie/${searchParams.get('id')}`
+                                : `/tv/${searchParams.get('id')}`,
                           };
                         })}
                         coverType={section.coverType}
                       />
                     </div>
-                  )
+                  ),
                 )}
             </InfiniteScroll>
           )}
@@ -153,8 +134,8 @@ const Home: FC = () => {
 
         <div className="flex-shrink-0 w-[350px] p-8 sticky top-0 h-screen scrollbar overflow-hidden overflow-y-auto hidden md:block">
           <SearchBox />
-          <h1 className="text-xl my-6">Recommend</h1>
-          <TopSearches />
+          {/* <h1 className="text-xl my-6">Recommend</h1>
+          <TopSearches /> */}
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
 
-import ExploreResult from "./ExploreResult";
-import { SearchConfig } from "../../shared/types";
+import ExploreResult from './ExploreResult';
+import { SearchConfig } from '../../shared/types';
 
 interface ExploreConfigProps {
   config: SearchConfig;
@@ -13,7 +13,7 @@ const ExploreConfig: FC<ExploreConfigProps> = ({ config, sectionIndex }) => {
     config.screeningItems.reduce((acc, current) => {
       acc[current.items[0].screeningType] = current.items[0].params;
       return acc;
-    }, {})
+    }, {}),
   );
 
   const handleConfigChange = (name, value) => {
@@ -32,27 +32,17 @@ const ExploreConfig: FC<ExploreConfigProps> = ({ config, sectionIndex }) => {
             className="outline-none bg-dark-lighten px-3 py-2 rounded"
             key={`${index}`}
             value={configs[section.items[0].screeningType]}
-            onChange={(e) =>
-              handleConfigChange(section.items[0].screeningType, e.target.value)
-            }
+            onChange={(e) => handleConfigChange(section.items[0].screeningType, e.target.value)}
           >
             {section.items.map((selection) => (
-              <option
-                className="outline-none bg-dark-lighten px-3 py-2"
-                key={selection.params}
-                value={selection.params}
-              >
+              <option className="outline-none bg-dark-lighten px-3 py-2" key={selection.params} value={selection.params}>
                 {selection.name}
               </option>
             ))}
           </select>
         ))}
       </div>
-      <ExploreResult
-        params={config.params}
-        configs={configs}
-        sectionIndex={sectionIndex}
-      />
+      <ExploreResult params={config.params} configs={configs} sectionIndex={sectionIndex} />
     </>
   );
 };

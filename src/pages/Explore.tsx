@@ -1,16 +1,14 @@
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
 
-import Error from "../components/Error";
-import ExploreConfig from "../components/Explore/ExploreConfig";
-import NavBar from "../components/NavBar";
-import Title from "../components/Title";
-import { getSearchConfig } from "../services/explore";
-import useSWR from "swr";
+import Error from '../components/Error';
+import ExploreConfig from '../components/Explore/ExploreConfig';
+import NavBar from '../components/NavBar';
+import Title from '../components/Title';
+import { getSearchConfig } from '../services/explore';
+import useSWR from 'swr';
 
 const Explore: FC = () => {
-  const { data: searchConfig, error } = useSWR("search-config", () =>
-    getSearchConfig()
-  );
+  const { data: searchConfig, error } = useSWR('search-config', () => getSearchConfig());
 
   const [sectionIndex, setSectionIndex] = useState(0);
 
@@ -33,9 +31,7 @@ const Explore: FC = () => {
                 <button
                   key={index}
                   className={`transition relative after:absolute after:top-[110%] after:left-0 after:w-full after:h-[2px] after:bg-transparent after:rounded after:transition ${
-                    sectionIndex === index
-                      ? "text-primary after:bg-primary"
-                      : ""
+                    sectionIndex === index ? 'text-primary after:bg-primary' : ''
                   }`}
                   onClick={() => {
                     setSectionIndex(index);
@@ -45,10 +41,7 @@ const Explore: FC = () => {
                 </button>
               ))}
             </div>
-            <ExploreConfig
-              config={searchConfig[sectionIndex]}
-              sectionIndex={sectionIndex}
-            />
+            <ExploreConfig config={searchConfig[sectionIndex]} sectionIndex={sectionIndex} />
           </div>
         )}
       </div>
