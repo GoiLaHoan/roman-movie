@@ -31,6 +31,7 @@ Documentation API: [https://documenter.getpostman.com/view/18986031/UVXdNeFD](ht
 
 - Clone the Project
 - Run `npm install`
+- Run `npm run dev`
 - Create your own firebase project and add _The JSON stringified_ config to `VITE_FIREBASE_CONFIG` environment variable
 
 - Example .env file:
