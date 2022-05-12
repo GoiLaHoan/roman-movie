@@ -132,11 +132,11 @@ const Home: FC = () => {
           )}
         </div>
 
-        <div className="flex-shrink-0 w-[350px] p-8 sticky top-0 h-screen scrollbar overflow-hidden overflow-y-auto hidden md:block">
+        {/* <div className="flex-shrink-0 w-[350px] p-8 sticky top-0 h-screen scrollbar overflow-hidden overflow-y-auto hidden md:block">
           <SearchBox />
-          {/* <h1 className="text-xl my-6">Recommend</h1>
-          <TopSearches /> */}
-        </div>
+          <h1 className="text-xl my-6">Recommend</h1>
+          <TopSearches />
+        </div> */}
       </div>
     </>
   );

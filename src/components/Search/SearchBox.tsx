@@ -52,7 +52,7 @@ const SearchBox: FC<SearchBoxProps> = ({ autoFocus }) => {
           placeholder="Search..."
           autoFocus={autoFocus}
         />
-        <button className="absolute right-2 top-1/2 -translate-y-1/2">
+        <button className="absolute right-3 top-1/2 -translate-y-1/2">
           <i className="fas fa-search text-xl"></i>
         </button>
       </form>

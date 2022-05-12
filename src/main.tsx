@@ -7,18 +7,10 @@ import 'react-tuby/css/main.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-// import { SWRConfig } from "swr";
 
 ReactDOM.render(
   <BrowserRouter>
-    {/* <SWRConfig
-      value={{
-        revalidateOnFocus: false,
-        shouldRetryOnError: false,
-      }}
-    > */}
     <App />
-    {/* </SWRConfig> */}
   </BrowserRouter>,
   document.getElementById('root'),
 );
