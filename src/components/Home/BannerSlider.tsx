@@ -27,9 +27,9 @@ const BannerSlider: FC<SliderProps> = ({ images }) => {
                 alt=""
                 effect="opacity"
               />
-              <h1 className="scale-100 absolute left-[7%] bottom-[10%] text-xl md:text-3xl max-w-[86%] whitespace-nowrap overflow-hidden text-ellipsis">
+              {/* <h1 className="!leading-loose scale-100 absolute left-[7%] bottom-[10%] text-xl md:text-5xl max-w-[86%] whitespace-nowrap overflow-hidden text-ellipsis ">
                 {item.title}
-              </h1>
+              </h1> */}
             </div>
           </Link>
         </SwiperSlide>

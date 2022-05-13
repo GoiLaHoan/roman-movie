@@ -33,7 +33,7 @@ const Home: FC = () => {
     <>
       <Title value="Roman Movie" />
 
-      <div className="flex sm:hidden justify-between px-[4vw] mt-6">
+      <div className="flex sm:hidden justify-between px-[4vw] mt-6 sticky z-20">
         <Link to="/" className="flex items-center gap-2">
           <img style={{ marginLeft: '-16px' }} className="w-auto h-12 mr-16" src="/logo-roman.png" alt="" />
         </Link>
@@ -132,11 +132,11 @@ const Home: FC = () => {
           )}
         </div>
 
-        {/* <div className="flex-shrink-0 w-[350px] p-8 sticky top-0 h-screen scrollbar overflow-hidden overflow-y-auto hidden md:block">
+        <div className="flex-shrink-0 w-[350px] p-8 sticky top-0 h-screen scrollbar overflow-hidden overflow-y-auto hidden xl:block">
           <SearchBox />
           <h1 className="text-xl my-6">Recommend</h1>
           <TopSearches />
-        </div> */}
+        </div>
       </div>
     </>
   );

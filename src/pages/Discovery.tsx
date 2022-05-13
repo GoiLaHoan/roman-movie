@@ -13,7 +13,7 @@ import useSWRInfinite from 'swr/infinite';
 
 const Discovery: FC = () => {
   const [sidebarActive, setSidebarActive] = useState(false);
-
+  const [FavoriteVideo, setFavoriteVideo] = useState({ videoId: '', isLike: false });
   const getKey = (index: number) => `discovery-${index || 0}`;
 
   const { data, error, setSize } = useSWRInfinite(getKey, (key) => getDiscoveryItems(Number(key.split('-').slice(-1)[0])), {
@@ -30,7 +30,7 @@ const Discovery: FC = () => {
 
   return (
     <>
-      <div className="flex sm:hidden justify-between px-[4vw] mt-6">
+      <div className="flex sm:hidden justify-between px-[4vw] mt-6 sticky z-20">
         <Link to="/" className="flex items-center gap-2">
           <img style={{ marginLeft: '-16px' }} className="w-auto h-12 mr-16" src="/logo-roman.png" alt="" />
         </Link>
@@ -90,10 +90,19 @@ const Discovery: FC = () => {
 
                     <div className="flex flex-col items-center justify-center w-20 gap-5">
                       <div className="flex flex-col items-center gap-2">
-                        <button className="bg-dark-lighten rounded-full h-10 w-10 flex justify-center items-center">
-                          <i className="fas fa-heart text-red-500"></i>
+                        <button
+                          className="bg-dark-lighten rounded-full h-10 w-10 flex justify-center items-center"
+                          onClick={() => setFavoriteVideo({ isLike: !FavoriteVideo.isLike, videoId: item.id })}
+                        >
+                          <i
+                            className={`fas fa-heart ${
+                              FavoriteVideo.isLike && FavoriteVideo.videoId === item.id ? 'text-red-500' : ''
+                            }`}
+                          ></i>
                         </button>
-                        <span>{item.likeCount}</span>
+                        <span>
+                          {FavoriteVideo.isLike && FavoriteVideo.videoId === item.id ? item.likeCount + 1 : item.likeCount}
+                        </span>
                       </div>
 
                       {item?.refList?.[0]?.id && (

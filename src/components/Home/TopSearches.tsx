@@ -8,7 +8,6 @@ import useSWR from 'swr';
 
 const TopSearches: FC = () => {
   const { data, error } = useSWR('home-top-searches', () => getTopSearched());
-
   if (!data || error)
     return (
       <div className="flex flex-col gap-3">
@@ -24,7 +23,7 @@ const TopSearches: FC = () => {
 
   return (
     <div className="flex flex-col gap-3">
-      {data.map((top) => (
+      {data.slice(4).map((top) => (
         <Link
           to={top.domainType === 0 ? `/movie/${top.id}` : `/tv/${top.id}`}
           className="flex gap-2 hover:brightness-75 transition duration-300"

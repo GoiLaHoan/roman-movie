@@ -27,11 +27,22 @@ const Sidebar: FC<SidebarProps> = ({ sidebarActive, setSidebarActive }) => {
           sidebarActive ? 'translate-x-full' : 'translate-x-0'
         }`}
       >
-        <Link to="/" className="flex gap-2 items-center">
-          <img style={{ marginLeft: '-16px' }} className="w-auto h-12 mr-16" src="/logo-roman.png" alt="" />
-        </Link>
+        {/* <Link to="/" className="flex gap-2 items-center">
+          <img
+            style={{ marginLeft: '-16px' }}
+            className="w-auto h-12 mr-16 hidden sm:hidden xl:block"
+            src="/logo-roman.png"
+            alt=""
+          />
+          <img
+            style={{ marginLeft: '-12px' }}
+            className="w-auto h-12 mr-16 hidden sm:block xl:hidden"
+            src="/logo.png"
+            alt=""
+          />
+        </Link> */}
 
-        <div className="mt-0 sm:mt-4 xl:mt-0 block sm:flex flex-col gap-0 sm:gap-4 xl:block xl:gap-0">
+        <div className="mt-4 sm:mt-4 xl:mt-4 sm:mt-4 block sm:flex flex-col gap-0 sm:gap-4 xl:block xl:gap-0">
           <p className="text-white-700 uppercase mt-10 mb-4 block sm:hidden xl:block">Menu</p>
 
           <div className="flex flex-col items-stretch gap-3">
@@ -39,7 +50,7 @@ const Sidebar: FC<SidebarProps> = ({ sidebarActive, setSidebarActive }) => {
               to="/"
               className={`flex items-center gap-2 transition ${
                 location.pathname === '/'
-                  ? 'text-purple-600 border-r-4 border-purple-600 hover:brightness-125'
+                  ? 'text-primary border-r-4 border-primary hover:brightness-125'
                   : 'text-gray-400 hover:text-gray-300'
               }`}
             >
@@ -51,7 +62,7 @@ const Sidebar: FC<SidebarProps> = ({ sidebarActive, setSidebarActive }) => {
               to="/discovery"
               className={`flex items-center gap-2 transition ${
                 location.pathname === '/discovery'
-                  ? 'text-purple-600 border-r-4 border-purple-600 hover:brightness-125'
+                  ? 'text-primary border-r-4 border-primary hover:brightness-125'
                   : 'text-gray-400 hover:text-gray-300'
               }`}
             >
@@ -63,7 +74,7 @@ const Sidebar: FC<SidebarProps> = ({ sidebarActive, setSidebarActive }) => {
               to="/explore"
               className={`flex items-center gap-2 transition ${
                 location.pathname === '/explore'
-                  ? 'text-purple-600 border-r-4 border-purple-600 hover:brightness-125'
+                  ? 'text-primary border-r-4 border-primary hover:brightness-125'
                   : 'text-gray-400 hover:text-gray-300'
               }`}
             >
@@ -75,7 +86,7 @@ const Sidebar: FC<SidebarProps> = ({ sidebarActive, setSidebarActive }) => {
               to="/history"
               className={`flex items-center gap-2 transition ${
                 location.pathname === '/history'
-                  ? 'text-purple-600 border-r-4 border-purple-600 hover:brightness-125'
+                  ? 'text-primary border-r-4 border-primary hover:brightness-125'
                   : 'text-gray-400 hover:text-gray-300'
               }`}
             >
@@ -87,7 +98,7 @@ const Sidebar: FC<SidebarProps> = ({ sidebarActive, setSidebarActive }) => {
               to="/search"
               className={`lg:!hidden flex items-center gap-2 transition ${
                 location.pathname === '/search'
-                  ? 'text-purple-600 border-r-4 border-purple-600 hover:brightness-125'
+                  ? 'text-primary border-r-4 border-primary hover:brightness-125'
                   : 'text-gray-400 hover:text-gray-300'
               }`}
             >

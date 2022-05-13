@@ -39,7 +39,7 @@ const ExploreResult: FC<ExploreResultProps> = ({ params, configs, sectionIndex }
       hasMore={!error && data?.slice(-1)?.[0]?.length !== 0}
       loader={
         <div className="flex justify-center w-full">
-          <div className="w-10 h-10 border-[3px] border-primary border-t-transparent rounded-full animate-spin my-10"></div>
+          <div className="w-10 h-10 border-[3px] border-[#01f9e2] border-t-transparent rounded-full animate-spin my-10"></div>
         </div>
       }
       endMessage={<p className="text-center mt-6">Nothing more to see</p>}

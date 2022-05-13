@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 const Search: FC = () => {
   const queryParams = useQueryParams();
   const query = queryParams.get('q');
-  console.log(!query?.trim());
 
   if (!query?.trim())
     return (
@@ -30,11 +29,11 @@ const Search: FC = () => {
             stroke="currentColor"
             aria-hidden="true"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </Link>
         <div className="flex justify-center my-[100px] mx-6">
-          <div className="w-full max-w-[400px] flex flex-col items-center gap-4">
+          <div className="w-full max-w-[400px] flex flex-col gap-4">
             <div className="flex flex-col items-stretch gap-3">
               <h1 className="text-2xl">Search for your favorite movies</h1>
               <SearchBox autoFocus />
