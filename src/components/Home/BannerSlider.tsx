@@ -20,16 +20,13 @@ const BannerSlider: FC<SliderProps> = ({ images }) => {
       {images.map((item) => (
         <SwiperSlide key={item.image}>
           <Link to={item.link}>
-            <div className="w-full h-0 pb-[42%] relative">
+            <div className="w-full h-0 pb-[60%] relative">
               <LazyLoadImage
-                className="absolute top-0 left-0 w-full h-full object-cover opacity-75"
+                className="absolute top-0 left-0 w-full h-full object-contain opacity-75"
                 src={resizeImage(item.image, '900')}
                 alt=""
                 effect="opacity"
               />
-              {/* <h1 className="!leading-loose scale-100 absolute left-[7%] bottom-[10%] text-xl md:text-5xl max-w-[86%] whitespace-nowrap overflow-hidden text-ellipsis ">
-                {item.title}
-              </h1> */}
             </div>
           </Link>
         </SwiperSlide>

@@ -56,9 +56,9 @@ const Discovery: FC = () => {
 
   return (
     <>
-      <div className="flex sm:hidden justify-between px-[4vw] mt-6 sticky z-20">
+      <div className="flex sm:hidden sticky top-0 bg-[#000000bf] justify-between px-[4vw] pt-4 pb-2 z-20 sticky z-20">
         <Link to="/" className="flex items-center gap-2">
-          <img style={{ marginLeft: '-16px' }} className="w-auto h-12 mr-16" src="/logo-roman.png" alt="" />
+          <img style={{ marginLeft: '-9px' }} className="w-auto h-6 mr-16" src="/logo-roman.png" alt="" />
         </Link>
 
         <button onClick={() => setSidebarActive(!sidebarActive)}>
@@ -142,7 +142,7 @@ const Discovery: FC = () => {
                       </InView>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center w-20 gap-5 pt-48">
+                    <div className="flex flex-col items-center justify-center w-20 gap-5 sm:pt-48">
                       <div className="flex flex-col items-center gap-2">
                         <button
                           className="bg-dark-lighten rounded-full h-10 w-10 flex justify-center items-center"

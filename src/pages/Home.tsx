@@ -33,9 +33,9 @@ const Home: FC = () => {
     <>
       <Title value="Roman Movie" />
 
-      <div className="flex sm:hidden justify-between px-[4vw] mt-6 sticky z-20">
+      <div className="flex sm:hidden sticky top-0 bg-[#000000bf] justify-between px-[4vw] pt-4 pb-2 z-20">
         <Link to="/" className="flex items-center gap-2">
-          <img style={{ marginLeft: '-16px' }} className="w-auto h-12 mr-16" src="/logo-roman.png" alt="" />
+          <img style={{ marginLeft: '-9px' }} className="w-auto h-6 mr-16" src="/logo-roman.png" alt="" />
         </Link>
 
         <button onClick={() => setSidebarActive(!sidebarActive)}>
@@ -49,7 +49,7 @@ const Home: FC = () => {
         <div className="flex-grow px-[4vw] md:px-8 pb-8 pt-0 overflow-hidden flex flex-col items-stretch">
           {!data || error ? (
             <>
-              <div className="relative h-0 pb-[42%] mt-8">
+              <div className="relative h-0 pb-[60%] mt-8">
                 <Skeleton className="absolute top-0 left-0 w-full h-full rounded-2xl" />
               </div>
               {[...new Array(2)].map((_, index) => (
@@ -132,7 +132,7 @@ const Home: FC = () => {
           )}
         </div>
 
-        <div className="flex-shrink-0 w-[350px] p-8 sticky top-0 h-screen scrollbar overflow-hidden overflow-y-auto hidden xl:block">
+        <div className="flex-shrink-0 w-[320px] p-8 sticky top-0 h-screen scrollbar overflow-hidden overflow-y-auto hidden xl:block">
           <SearchBox />
           <h1 className="text-xl my-6">Recommend</h1>
           <TopSearches />
