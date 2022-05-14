@@ -59,7 +59,7 @@ const SignIn: FC = () => {
               <button
                 disabled={loading}
                 onClick={() => handleSignIn(new FacebookAuthProvider())}
-                className="flex items-center bg-primary text-white p-3 gap-3 rounded-md cursor-pointer hover:brightness-90 disabled:!brightness-75 disabled:!cursor-default transition duration-300 w-full"
+                className="flex items-center bg-[#0e8cf1] text-white p-3 gap-3 rounded-md cursor-pointer hover:brightness-90 disabled:!brightness-75 disabled:!cursor-default transition duration-300 w-full"
               >
                 <img className="w-6 h-6" src="/facebook.svg" alt="" />
 

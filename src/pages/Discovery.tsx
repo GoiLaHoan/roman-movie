@@ -10,16 +10,16 @@ import Sidebar from '../components/Sidebar';
 import { getDiscoveryItems } from '../services/discovery';
 import { resizeImage } from '../shared/constants';
 import useSWRInfinite from 'swr/infinite';
+import { Player } from 'react-tuby';
 
 const Discovery: FC = () => {
   const [sidebarActive, setSidebarActive] = useState(false);
-  const [FavoriteVideo, setFavoriteVideo] = useState({ videoId: '', isLike: false });
+  const [arrFavoriteVideo, setArrFavoriteVideo] = useState<any[]>([]);
+  const [activeToast, setActiveToast] = useState(false);
   const getKey = (index: number) => `discovery-${index || 0}`;
-
   const { data, error, setSize } = useSWRInfinite(getKey, (key) => getDiscoveryItems(Number(key.split('-').slice(-1)[0])), {
     revalidateFirstPage: false,
   });
-
   const location = useLocation();
 
   useEffect(() => {
@@ -27,6 +27,32 @@ const Discovery: FC = () => {
   }, [location]);
 
   if (error) return <Error />;
+
+  const handleLikeVideo = (videoId) => {
+    const index = arrFavoriteVideo.findIndex((item) => item.videoId === videoId);
+    if (index === -1) {
+      setArrFavoriteVideo((arrFavoriteVideo) => [...arrFavoriteVideo, { videoId: videoId, isLike: true }]);
+    } else {
+      setArrFavoriteVideo((arrFavoriteVideo) => [...arrFavoriteVideo.slice(0, index), ...arrFavoriteVideo.slice(index + 1)]);
+    }
+  };
+  const handleClickComment = () => {
+    setActiveToast(true);
+  };
+  useEffect(() => {
+    let timer1: NodeJS.Timeout;
+    if (activeToast === true) {
+      timer1 = setTimeout(() => {
+        setActiveToast(false);
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(timer1);
+    };
+  }, [activeToast]);
+
+  console.log(activeToast);
 
   return (
     <>
@@ -44,6 +70,31 @@ const Discovery: FC = () => {
         <Sidebar sidebarActive={sidebarActive} setSidebarActive={setSidebarActive} />
 
         <div className="flex-grow py-10 px-[4vw]">
+          <div
+            className={`fixed flex items-center w-full max-w-xs p-4 top-5 right-5 text-gray-500 bg-white rounded-lg shadow 
+            ${activeToast ? '' : 'hidden'}`}
+          >
+            <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-black bg-primary rounded-lg">
+              <i className="fas fa-lock"></i>
+            </div>
+            <div className="ml-3 text-sm font-normal">Comments are locked</div>
+            <button
+              type="button"
+              className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+              aria-label="Close"
+              onClick={() => setActiveToast(false)}
+            >
+              <span className="sr-only">Close</span>
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
           {!data && (
             <div className="h-screen w-full flex justify-center items-center">
               <div className="w-10 h-10 border-[3px] border-t-transparent border-primary rounded-full animate-spin"></div>
@@ -67,42 +118,57 @@ const Discovery: FC = () => {
                     />
 
                     <div className="flex flex-col items-stretch flex-grow gap-3">
-                      <p className="font-semibold">{item.refList[0]?.name || item.name}</p>
+                      <p className="font-semibold text-primary">{item.refList[0]?.name || item.name}</p>
 
-                      <p>{item.introduction}</p>
+                      <p className="text-sm">{item.introduction}</p>
 
                       <InView threshold={0.5}>
                         {({ ref, inView }) => (
-                          <div ref={ref} className="h-0 relative pb-[100%]">
-                            {/* @ts-ignore */}
-                            <HlsPlayer
-                              controls
-                              muted
-                              autoPlay={inView}
-                              playsInline
-                              src={item.mediaUrl}
-                              className="absolute top-0 left-0 w-full h-full object-contain"
-                            />
+                          <div ref={ref} className="relative w-full">
+                            <Player primaryColor="#0D90F3" src={item.mediaUrl} dimensions={100}>
+                              {(ref, props) => (
+                                <HlsPlayer
+                                  playerRef={ref}
+                                  {...props}
+                                  src={item.mediaUrl}
+                                  playsInline
+                                  muted
+                                  autoPlay={inView}
+                                />
+                              )}
+                            </Player>
                           </div>
                         )}
                       </InView>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center w-20 gap-5">
+                    <div className="flex flex-col items-center justify-center w-20 gap-5 pt-48">
                       <div className="flex flex-col items-center gap-2">
                         <button
                           className="bg-dark-lighten rounded-full h-10 w-10 flex justify-center items-center"
-                          onClick={() => setFavoriteVideo({ isLike: !FavoriteVideo.isLike, videoId: item.id })}
+                          onClick={() => handleLikeVideo(item.id)}
                         >
                           <i
                             className={`fas fa-heart ${
-                              FavoriteVideo.isLike && FavoriteVideo.videoId === item.id ? 'text-red-500' : ''
+                              arrFavoriteVideo.map((item) => item.videoId).includes(item.id) ? 'text-red-500' : ''
                             }`}
                           ></i>
                         </button>
                         <span>
-                          {FavoriteVideo.isLike && FavoriteVideo.videoId === item.id ? item.likeCount + 1 : item.likeCount}
+                          {arrFavoriteVideo.map((item) => item.videoId).includes(item.id)
+                            ? item.likeCount + 1
+                            : item.likeCount}
                         </span>
+                      </div>
+
+                      <div className="flex flex-col items-center gap-2">
+                        <button
+                          className="bg-dark-lighten rounded-full h-10 w-10 flex justify-center items-center"
+                          onClick={handleClickComment}
+                        >
+                          <i className="fas fa-comment-dots"></i>
+                        </button>
+                        <span>{item.id}</span>
                       </div>
 
                       {item?.refList?.[0]?.id && (
@@ -111,6 +177,7 @@ const Discovery: FC = () => {
                             to={
                               item.refList[0].category === 0 ? `/movie/${item.refList[0].id}` : `/tv/${item.refList[0].id}`
                             }
+                            target="_blank"
                             className="bg-dark-lighten rounded-full h-10 w-10 flex justify-center items-center"
                           >
                             <i className="fas fa-external-link-alt"></i>

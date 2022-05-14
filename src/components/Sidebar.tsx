@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { auth } from '../shared/firebase';
 import { resizeImage } from '../shared/constants';
 import { signOut } from 'firebase/auth';
@@ -15,19 +15,60 @@ const Sidebar: FC<SidebarProps> = ({ sidebarActive, setSidebarActive }) => {
   const location = useLocation();
 
   const currentUser = useStore((state) => state.currentUser);
-
-  const handleSignOut = () => {
+  const [isLogout, setIsLogout] = useState(false);
+  const handleClickSingout = () => {
+    setIsLogout(false);
     signOut(auth);
   };
-
   return (
     <>
+      <div className={`relative z-10 ${isLogout ? 'block' : 'hidden'}`} aria-labelledby="modal-title" aria-modal="true">
+        <div className="fixed inset-0 bg-black bg-opacity-60 transition-opacity"></div>
+
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+          <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+            <div className="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all mb-36 sm:my-8 sm:max-w-lg sm:w-full">
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                      Sign Out
+                    </h3>
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">Are you sure you want to sign out?</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button
+                  type="button"
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={handleClickSingout}
+                >
+                  Sign Out
+                </button>
+                <button
+                  type="button"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={() => {
+                    setIsLogout(false);
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div
         className={`flex-shrink-0 sm:sticky left-auto right-full sm:!right-0 sm:!left-0 fixed top-0 flex flex-col items-stretch py-8 pl-5 xl:pl-8 pr-0 w-[90vw] max-w-[288px] sm:max-w-none sm:w-16 xl:w-56 border-r border-gray-800 h-screen overflow-y-auto z-10 bg-dark sm:bg-transparent sm:!translate-x-0 transition-all duration-500 ${
           sidebarActive ? 'translate-x-full' : 'translate-x-0'
         }`}
       >
-        {/* <Link to="/" className="flex gap-2 items-center">
+        <Link to="/" className="flex gap-2 items-center">
           <img
             style={{ marginLeft: '-16px' }}
             className="w-auto h-12 mr-16 hidden sm:hidden xl:block"
@@ -40,7 +81,7 @@ const Sidebar: FC<SidebarProps> = ({ sidebarActive, setSidebarActive }) => {
             src="/logo.png"
             alt=""
           />
-        </Link> */}
+        </Link>
 
         <div className="mt-4 sm:mt-4 xl:mt-4 sm:mt-4 block sm:flex flex-col gap-0 sm:gap-4 xl:block xl:gap-0">
           <p className="text-white-700 uppercase mt-10 mb-4 block sm:hidden xl:block">Menu</p>
@@ -125,7 +166,7 @@ const Sidebar: FC<SidebarProps> = ({ sidebarActive, setSidebarActive }) => {
                 <p className="text-gray-400 block sm:hidden xl:block">{currentUser.displayName}</p>
               </div>
               <button
-                onClick={handleSignOut}
+                onClick={() => setIsLogout(true)}
                 className="flex items-center cursor-pointer gap-2 transition text-gray-400 hover:text-gray-300"
               >
                 <i className="fas fa-sign-out-alt text-xl w-[24px]"></i>

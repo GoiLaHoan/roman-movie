@@ -26,7 +26,8 @@ body {
   @apply hidden;
 }
 
-.swiper-button-prev, .swiper-button-next {
+.swiper-button-prev,
+.swiper-button-next {
   color: #01f9e2 !important;
 }
 /* .base {
