@@ -30,6 +30,9 @@ body {
 .swiper-button-next {
   color: #01f9e2 !important;
 }
+.swiper-pagination-bullet-active-main {
+  background: #01f9e2 !important;
+}
 /* .base {
   color: #00000080;
 } */

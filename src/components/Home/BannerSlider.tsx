@@ -1,11 +1,12 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-
 import { FC } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import { Navigation } from 'swiper';
+import { Navigation, Pagination } from 'swiper';
 import { resizeImage } from '../../shared/constants';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
 interface SliderProps {
   images: {
     title: string;
@@ -13,10 +14,20 @@ interface SliderProps {
     link: string;
   }[];
 }
-
 const BannerSlider: FC<SliderProps> = ({ images }) => {
+  SwiperCore.use([Autoplay]);
   return (
-    <Swiper className="rounded-2xl overflow-hidden" modules={[Navigation]} navigation loop slidesPerView={1}>
+    <Swiper
+      className="rounded-2xl overflow-hidden"
+      modules={[Navigation, Pagination]}
+      navigation
+      pagination={{
+        dynamicBullets: true,
+      }}
+      loop
+      autoplay={{ delay: 4000 }}
+      slidesPerView={1}
+    >
       {images.map((item) => (
         <SwiperSlide key={item.image}>
           <Link to={item.link}>

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import ChangeLanguage from './ChangeLanguage';
 import SearchBox from './Search/SearchBox';
 
 const NavBar: FC = () => {
@@ -14,6 +15,7 @@ const NavBar: FC = () => {
       </Link>
 
       <div className="max-w-[500px] hidden md:block">
+        <ChangeLanguage />
         <SearchBox />
       </div>
     </div>

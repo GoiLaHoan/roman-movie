@@ -13,7 +13,7 @@ import TopSearches from '../components/Home/TopSearches';
 import { getHome } from '../services/home';
 import { resizeImage } from '../shared/constants';
 import useSWRInfinite from 'swr/infinite';
-
+import ChangeLanguage from '../components/ChangeLanguage';
 const Home: FC = () => {
   const getKey = (index: number) => `home-${index || 0}`;
 
@@ -133,8 +133,9 @@ const Home: FC = () => {
         </div>
 
         <div className="flex-shrink-0 w-[320px] p-8 sticky top-0 h-screen scrollbar overflow-hidden overflow-y-auto hidden xl:block">
+          <ChangeLanguage />
           <SearchBox />
-          <h1 className="text-xl my-6">Recommend</h1>
+          <h1 className="text-xl mb-6 mt-3">Recommend</h1>
           <TopSearches />
         </div>
       </div>

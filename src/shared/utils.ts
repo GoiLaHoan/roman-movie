@@ -7,6 +7,15 @@ export const formatVideoTime = (time: number) => {
 
 export const isMobile = () => /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent);
 
+export const language = (lang: string) => {
+  const langs = ['en', 'vi'];
+  if (langs.includes(lang)) {
+    localStorage.setItem('lang', JSON.stringify(lang));
+    return lang;
+  }
+  return 'en';
+}
+
 export const htmlToText = (html: string) => {
   const div = document.createElement('div');
   div.innerHTML = html;
