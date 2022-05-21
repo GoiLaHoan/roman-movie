@@ -10,15 +10,12 @@ const instance = axios.create({
   },
 });
 
-instance.interceptors.request.use(
-  config => {
-    const items = JSON.parse(localStorage.getItem('lang') || '');
-    if (items) {
-      const header = config.headers
-      if (header) header.lang = items;
-    }
-    return config;
+instance.interceptors.request.use((config) => {
+  const items = JSON.parse(localStorage.getItem('lang') || '');
+  if (items) {
+    const header = config.headers;
+    if (header) header.lang = items;
   }
-);
+  return config;
+});
 export default instance;
-

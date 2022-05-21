@@ -14,7 +14,7 @@ export const language = (lang: string) => {
     return lang;
   }
   return 'en';
-}
+};
 
 export const htmlToText = (html: string) => {
   const div = document.createElement('div');
