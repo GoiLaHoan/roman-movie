@@ -25,7 +25,7 @@ const BannerSlider: FC<SliderProps> = ({ images }) => {
         dynamicBullets: true,
       }}
       loop
-      autoplay={{ delay: 4000 }}
+      autoplay={{ delay: 1750 }}
       slidesPerView={1}
     >
       {images.map((item) => (

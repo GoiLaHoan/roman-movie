@@ -140,7 +140,7 @@ const Discovery: FC = () => {
                       </InView>
                     </div>
 
-                    <div className="hidden flex flex-col items-center justify-center w-20 gap-5 sm:pt-48 sm:block">
+                    <div className="flex flex-col items-center justify-center w-20 gap-5 sm:pt-48">
                       <div className="flex flex-col items-center gap-2">
                         <button
                           className="bg-dark-lighten rounded-full h-10 w-10 flex justify-center items-center"

@@ -10,19 +10,19 @@ const ChangeLanguage: FC = () => {
     language('vi');
     window.location.reload();
   };
-  console.log(JSON.parse(localStorage.getItem('lang') || '') === 'en');
+  const lang = localStorage.getItem('lang');
   return (
     <div className="flex font-bold justify-end">
       <span
         onClick={changeLanguageEn}
-        className={`cursor-pointer ${JSON.parse(localStorage.getItem('lang') || '') === 'en' ? 'text-primary' : ''}`}
+        className={`cursor-pointer ${lang && JSON.parse(lang) === 'en' ? 'text-primary' : `${!lang ? 'text-primary' : ''}`}`}
       >
         en
       </span>
       <span className="mx-1.5">|</span>
       <span
         onClick={changeLanguageVi}
-        className={`cursor-pointer ${JSON.parse(localStorage.getItem('lang') || '') === 'vi' ? 'text-primary' : ''}`}
+        className={`cursor-pointer ${lang && JSON.parse(localStorage.getItem('lang') || '') === 'vi' ? 'text-primary' : ''}`}
       >
         vi
       </span>

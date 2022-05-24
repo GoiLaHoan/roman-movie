@@ -11,7 +11,8 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const items = JSON.parse(localStorage.getItem('lang') || '');
+  const lang = localStorage.getItem('lang');
+  const items = lang && JSON.parse(lang);
   if (items) {
     const header = config.headers;
     if (header) header.lang = items;
